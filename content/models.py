@@ -10,7 +10,7 @@ from test_app.models import Test
 class AnatomySection(models.Model):
     group = models.ForeignKey(AnatomyGroup, on_delete=models.DO_NOTHING, verbose_name='Группа')
     type = models.ForeignKey(AnatomyType, on_delete=models.DO_NOTHING, verbose_name='Тип')
-    image = models.FilePathField(path="static/media/database/images/", blank=True, null=True, verbose_name='Обложка')
+    image = models.FilePathField(path="/static/media/database/images/", blank=True, null=True, verbose_name='Обложка')
 
     articles = models.ManyToManyField(Article, blank=True, verbose_name='Статьи')
     tests = models.ManyToManyField(Test, blank=True, verbose_name='Тесты')
@@ -27,7 +27,7 @@ class AnatomySection(models.Model):
 # Гистология
 class HistologySection(models.Model):
     group = models.ForeignKey(HistologyGroup, on_delete=models.DO_NOTHING, verbose_name='Группа')
-    image = models.FilePathField(path="static/media/database/images/", blank=True, null=True, verbose_name='Обложка')
+    image = models.FilePathField(path="/static/media/database/images/", blank=True, null=True, verbose_name='Обложка')
 
     articles = models.ManyToManyField(Article, blank=True, verbose_name='Статьи')
     tests = models.ManyToManyField(Test, blank=True, verbose_name='Тесты')

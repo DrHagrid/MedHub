@@ -19,7 +19,7 @@ class AnatomyElement(models.Model):
                              verbose_name='Тип')
     info = models.TextField(blank=True, null=True, verbose_name='Информация',
                             help_text='Разрешено использовать тэги HTML')
-    image = models.FilePathField(path="static/media/database/images/", blank=True, null=True, verbose_name='Иллюстрация')
+    image = models.FilePathField(path="/static/media/database/images/", blank=True, null=True, verbose_name='Иллюстрация')
 
     def __str__(self):
         return "%s" % self.name
@@ -69,7 +69,7 @@ class HistologyElement(models.Model):
                               verbose_name='Группа')
     info = models.TextField(blank=True, null=True, verbose_name='Информация',
                             help_text='Разрешено использовать тэги HTML')
-    image = models.FilePathField(path="static/media/database/images/", blank=True, null=True, verbose_name='Иллюстрация')
+    image = models.FilePathField(path="/static/media/database/images/", blank=True, null=True, verbose_name='Иллюстрация')
 
     def __str__(self):
         return "%s" % self.name
@@ -126,7 +126,7 @@ class Article(models.Model):
     theme = models.ForeignKey(ArticleTheme, on_delete=models.DO_NOTHING, blank=True, null=True, verbose_name='Тема')
     author = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='Автор')
     date = models.DateTimeField(default=timezone.now, verbose_name='Дата')
-    image = models.FilePathField(path="static/media/database/images/", blank=True, null=True, verbose_name='Иллюстрация')
+    image = models.FilePathField(path="/static/media/database/images/", blank=True, null=True, verbose_name='Иллюстрация')
     is_main = models.BooleanField(default=True, verbose_name='Отображать на главной странице')
 
     def __str__(self):
