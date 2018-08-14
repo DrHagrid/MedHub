@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block breacrumb %}
+    <li class="breadcrumb-item"><a href="/start/{{ unit.variable }}">{{ unit.name }}</a></li>
+{% endblock %}
+
+{% block title %}
+    {{ group.name }}
+{% endblock %}
+
+
+{% block content %}
+    {% for section in section_list %}
+        <h3>{{ section.name }}</h3>
+            {% for element in section.elements %}
+                <div class="col-md-6 ml-auto mr-auto">
+                    <div class="card">
+                        <div class="card-header card-header-icon card-header-danger" >
+                            <div class="card-icon">
+                                <i class="material-icons">
+                                    {% if element.type == 'article' %}
+                                        description
+                                    {% endif %}
+                                    {% if element.type == 'test' %}
+                                        school
+                                    {% endif %}
+                                </i> <h6 class="card-title" onclick="location.href='{{ element.type }}/{{ element.url }}'">{{ element.name }}</h6> {% if element.type == 'test' %}<i class="material-icons stat-icon" onclick="location.href='{{ element.type }}/{{ element.url }}/stat/'">insert_chart</i>{% endif %}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            {% if element.type == 'test' %}
+                                <div class="row">
+                                    <div class="stat-progress col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width:{{ element.correct }}%">
+                                            </div>
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width:{{ element.incorrect }}%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {{ element.description }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+    {% endfor %}
+{% endblock %}

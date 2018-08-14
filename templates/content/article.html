@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block breacrumb %}
+    {% if unit %}
+        <li class="breadcrumb-item"><a href="/start/{{ unit.variable }}">{{ unit.name }}</a></li>
+    {% endif %}
+    {% if group %}
+        <li class="breadcrumb-item"><a href="/start/{{ unit.variable }}/{{ group.variable }}">{{ group.name }}</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block title %}
+    {{ article.title }}
+{% endblock %}
+
+
+{% block content %}
+    {% if article.image %}
+        <img src="/{{ article.image }}" class="img-fluid">
+    {% endif %}
+    <div class="article-content text-left">
+        {% autoescape off %}
+            {{ article.content }}
+        {% endautoescape %}
+    </div>
+    <div class="article-info text-left">
+        <b>Автор: </b>
+        {{ article.author.username }}
+        <b>Дата: </b>
+        {{ article.date }}
+    </div>
+{% endblock %}

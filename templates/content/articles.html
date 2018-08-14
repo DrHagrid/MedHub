@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block breacrumb %}
+
+{% endblock %}
+
+{% block title %}
+    {% if theme == 'all' %}
+        Все статьи
+    {% else %}
+        {{ theme.name }}
+    {% endif %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <span class="article-theme badge badge-default" onclick="location.href='/articles/all'">Все</span>
+        {% for theme in themes %}
+            <span class="article-theme badge badge-{{ theme.color }}" onclick="location.href='/articles/{{ theme.variable }}'">{{ theme.name }}</span>
+        {% endfor %}
+    </div>
+    <div class="row">
+        {% for article in article_list %}
+            <div class="col-md-6">
+                <div class="article">
+                    <div class="card card-background" style="background-image: {% if article.image %}url('/{{ article.image }}'){% else %}url('{% static 'img/bg.png' %}'){% endif %}">
+                        <a href="article/{{ article.id }}"></a>
+                        <div class="card-body">
+                            <label class="badge badge-{{ article.theme.color }}">{{ article.theme.name }}</label>
+                            <a href="article/{{ article.id }}">
+                                <h2 class="card-title">{{ article.title }}</h2>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

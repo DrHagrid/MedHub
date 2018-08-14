@@ -1,0 +1,76 @@
+<nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+    <div class="container">
+        <div class="navbar-translate">
+            <a class="navbar-brand" href="/">Med-hub</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="dropdown nav-item">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <i class="material-icons">apps</i> Содержимое
+                    </a>
+                    <div class="dropdown-menu dropdown-with-icons">
+                        <a href="/start/anatomy" class="dropdown-item">
+                            <i class="material-icons">content_paste</i> Анатомия
+                        </a>
+                        <a href="/start/histology" class="dropdown-item">
+                            <i class="material-icons">content_paste</i> Гистология
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="/articles/all" class="dropdown-item">
+                            <i class="material-icons">description</i> Статьи
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://vk.com/" target="_blank" data-original-title="VK">
+                        <i class="fa fa-vk"></i> <span class="d-md-none">VK</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.twitter.com/" target="_blank" data-original-title="Twitter">
+                        <i class="fa fa-twitter"></i> <span class="d-md-none">Twitter</span>
+                    </a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="dropdown nav-item">
+                    <a href="" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <i class="material-icons">account_circle</i> Аккаунт
+                    </a>
+                    <div class="dropdown-menu dropdown-with-icons">
+                        <a href="" class="dropdown-item">
+                            <i class="material-icons">face</i> {{ user.username }}
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        {% if user.is_staff %}
+                            <a href="/admin" class="dropdown-item">
+                                <i class="material-icons">dashboard</i> Админ-панель
+                            </a>
+                        {% endif %}
+                        <a href="/logout" class="dropdown-item">
+                            <i class="material-icons">exit_to_app</i> Выйти
+                        </a>
+                    </div>
+                </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="/register" class="nav-link">
+                            <i class="material-icons">vpn_key</i> Регистрация
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/login" class="nav-link">
+                            <i class="material-icons">vpn_key</i> Вход
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

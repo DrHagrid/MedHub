@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block breacrumb %}
+    <li class="breadcrumb-item"><a href="/start/{{ unit.variable }}">{{ unit.name }}</a></li>
+    <li class="breadcrumb-item"><a href="/start/{{ unit.variable }}/{{ group.variable }}">{{ group.name }}</a></li>
+    <li class="breadcrumb-item"><a href="/start/{{ unit.variable }}/{{ group.variable }}/test/{{ test_id }}">{{ test_name }}</a></li>
+{% endblock %}
+
+{% block title %}
+    Статистика
+{% endblock %}
+
+
+{% block content %}
+    <div class="text-left">
+        {% if user.is_authenticated %}
+            <div class="row">
+                <div class="stat-progress col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width:{{ correct_percent }}%">
+                        </div>
+                        <div class="progress-bar bg-danger" role="progressbar" style="width:{{ incorrect_percent }}%">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="list-group">
+                <li class="list-group-item">Заданий всего: {{ total }}</li>
+                <li class="list-group-item">Решено верно: {{ correct }}</li>
+                <li class="list-group-item">Решено неверно: {{ incorrect }}</li>
+            </ul>
+
+            <br>
+            <b><p class="text-center">Допущенные ошибки:</p></b>
+
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Вопрос</th>
+                        <th scope="col">Ответ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% if 'lat_' in test_id %}
+                    {% for element in incorrect_list %}
+                        <tr>
+                            <td>{{ element.name }}</td>
+                            <td>{{ element.lat_term }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    {% for element in incorrect_list %}
+                        <tr>
+                            <td>{{ element.question }}</td>
+                            <td>{{ element.answer }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="text-center">Для получения статистики, необходимо зарегистрироваться</p>
+            <p class="text-center"><a href="/">Вернуться на главную</a></p>
+        {% endif %}
+    </div>
+{% endblock %}
