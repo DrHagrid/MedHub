@@ -72,6 +72,8 @@ def group_page(request, unit, group):
                 if not (unit['variable'] + "_" + group.variable + "_" + 'lat_' + section.type.variable in user_data.keys()):
                     user_data[unit['variable'] + "_" + group.variable + "_" + 'lat_' + section.type.variable] = {
                         'correct': 0, 'incorrect': 0, 'incorrect_list': []}
+                    user_info.set_data(user_data)
+                    user_info.save()
                 correct = user_data[unit['variable'] + "_" + group.variable + "_" + 'lat_' + section.type.variable]['correct']
                 correct_percent = round((int(correct) / total) * 100)
                 incorrect_percent = 100 - correct_percent
