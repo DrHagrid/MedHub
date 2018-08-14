@@ -15,7 +15,7 @@ class Question(models.Model):
     test_type = models.CharField(max_length=64, default='radio', choices=TEST_TYPE_CHOICES, verbose_name='Тип вопроса')
     options = models.TextField(default='', blank=True, null=True, verbose_name='Варианты',
                                help_text='Впишите в это поле все варианты, включая верный, разделяя знаком ";"')
-    image = models.FilePathField(path="/static/media/database/images", blank=True, null=True, verbose_name='Иллюстрация')
+    image = models.ForeignKey(Image, blank=True, null=True, on_delete=models.DO_NOTHING, verbose_name='Иллюстрация')
 
     anatomy = models.ForeignKey('database.AnatomyElement', on_delete=models.DO_NOTHING, blank=True, null=True,
                                 verbose_name='На основе анатомического элемента',

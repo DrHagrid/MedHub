@@ -25,7 +25,7 @@
         {% for article in article_list %}
             <div class="col-md-6">
                 <div class="article">
-                    <div class="card card-background" style="background-image: {% if article.image %}url('/{{ article.image }}'){% else %}url('{% static 'img/bg.png' %}'){% endif %}">
+                    <div class="card card-background" style="background-image: {% if article.image.file %}url('/{{ article.image.file.url }}'){% else %}url('{% static 'img/bg.png' %}'){% endif %}">
                         <a href="article/{{ article.id }}"></a>
                         <div class="card-body">
                             <label class="badge badge-{{ article.theme.color }}">{{ article.theme.name }}</label>

@@ -16,8 +16,8 @@
 
 
 {% block content %}
-    {% if article.image %}
-        <img src="/{{ article.image }}" class="img-fluid">
+    {% if article.image.file %}
+        <img src="/{{ article.image.file.url }}" class="img-fluid">
     {% endif %}
     <div class="article-content text-left">
         {% autoescape off %}

@@ -127,7 +127,7 @@ def test_data(request):
             return_dict["answer"] = element.lat_term
             return_dict["title"] = element.name
             if element.image:
-                return_dict["image_url"] = '../../../../../' + element.image
+                return_dict["image_url"] = '/' + element.image.file.url
 
         else:
             element = Question.objects.get(pk=element_id)
@@ -135,7 +135,7 @@ def test_data(request):
             return_dict["answer"] = element.answer
             return_dict["title"] = element.question
             if element.image:
-                return_dict["image_url"] = '../../../../../' + element.image
+                return_dict["image_url"] = '/' + element.image.file.url
 
             if test_type == 'radio':
                 options = element.options.split(';')
