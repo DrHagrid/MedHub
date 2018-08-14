@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from user.views import create_user_info
 from content.models import *
-from test.models import *
+from test_app.models import *
 from user.models import *
 
 

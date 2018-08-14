@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
 from database.models import *
-from test.models import Test
+from test_app.models import Test
 
 
 # Группы анатомии
