@@ -1,3 +1,4 @@
 User-agent: *
 Disallow: /admin/
 Host: medhub.pythonanywhere.com
+Sitemap: http://medhub.pythonanywhere.com/sitemap.xml
