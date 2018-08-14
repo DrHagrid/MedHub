@@ -35,7 +35,10 @@ def group_page(request, unit, group):
 
     if request.user.is_authenticated:
         user_info = UserInfo.objects.get(user=request.user)
-        user_data = user_info.get_data()
+        if user_info.data:
+            user_data = user_info.get_data()
+        else:
+            user_data = dict()
 
     section_list = list()
     for section in unit['section'].objects.filter(group=group):
