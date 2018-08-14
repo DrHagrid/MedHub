@@ -14,5 +14,5 @@ urlpatterns = [
     url(r'', include('user.urls')),
     url(r'', include('database.urls')),
     url(r'', include('content.urls')),
-    url(r'', include('test.urls')),
+    url(r'', include('test_app.urls')),
 ]

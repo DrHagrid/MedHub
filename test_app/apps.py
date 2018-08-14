@@ -3,6 +3,6 @@ from django.apps import AppConfig
 
 
 class TestConfig(AppConfig):
-    name = 'test'
+    name = 'test_app'
     verbose_name = 'Тесты'
 
