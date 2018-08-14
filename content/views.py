@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from user.models import UserInfo
 from user.views import create_user_info
 from content.models import *
-
-# Внутренние функции
 
 
 # Представления
