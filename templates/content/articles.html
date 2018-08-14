@@ -26,7 +26,7 @@
             <div class="col-md-6">
                 <div class="article">
                     <div class="card card-background" style="background-image: {% if article.image.file %}url('/{{ article.image.file.url }}'){% else %}url('{% static 'img/bg.png' %}'){% endif %}">
-                        <a href="article/{{ article.id }}"></a>
+                        <a href="/article/{{ article.id }}"></a>
                         <div class="card-body">
                             <label class="badge badge-{{ article.theme.color }}">{{ article.theme.name }}</label>
                             <a href="article/{{ article.id }}">
