@@ -3,6 +3,7 @@ from django.shortcuts import render, render_to_response
 from user.models import UserInfo
 from user.views import create_user_info
 from content.models import *
+import json
 
 
 # Представления
@@ -23,15 +24,15 @@ def unit_page(request, unit):
 
     unit = unit_list[unit]
 
-    group_list = unit['group'].objects.all()
+    section_list = unit['section'].objects.all()
     return render(request, 'content/unit.html', locals())
 
 
-def group_page(request, unit, group):
+def section_page(request, unit, section):
     created = create_user_info(request)  # Создать информацию о пользователе, в случае её отсутствия
 
     unit = unit_list[unit]
-    group = unit['group'].objects.get(variable=group)
+    section = unit['section'].objects.get(variable=section)
 
     if request.user.is_authenticated:
         user_info = UserInfo.objects.get(user=request.user)
@@ -40,54 +41,34 @@ def group_page(request, unit, group):
         else:
             user_data = dict()
 
-    section_list = list()
-    for section in unit['section'].objects.filter(group=group):
-        elements = list()
-
-        for article in section.articles.all():
+    elements = list()
+    for element in section.get_content():
+        if element['type'] == 'article':
+            article = Article.objects.get(pk=element['id'])
             elements.append({'name': article.title, 'type': 'article',
                              'url': article.id, 'description': article.description})
+        elif element['type'] == 'test':
+            test = Test.objects.get(pk=element['id'])
 
-        for test in section.tests.all():
-            total = len(Test.objects.get(pk=test.id).questions.all())
+            total = len(test.questions.all())
             if request.user.is_authenticated:
-                if not (unit['variable'] + "_" + group.variable + "_" + str(test.id) in user_data.keys()):
-                    user_data[unit['variable'] + "_" + group.variable + "_" + str(test.id)] = {'correct': 0, 'incorrect': 0,
+                if not (unit['variable'] + "_" + section.variable + "_" + str(test.id) in user_data.keys()):
+                    user_data[unit['variable'] + "_" + section.variable + "_" + str(test.id)] = {'correct': 0, 'incorrect': 0,
                                                                                           'incorrect_list': []}
                     user_info.set_data(user_data)
                     user_info.save()
-                correct = user_data[unit['variable'] + "_" + group.variable + "_" + str(test.id)]['correct']
+                correct = user_data[unit['variable'] + "_" + section.variable + "_" + str(test.id)]['correct']
+                incorrect = user_data[unit['variable'] + "_" + section.variable + "_" + str(test.id)]['incorrect']
                 correct_percent = round((int(correct) / total) * 100)
-                incorrect_percent = 100 - correct_percent
+                incorrect_percent = round((int(incorrect) / total) * 100)
             else:
                 correct_percent = 0
                 incorrect_percent = 0
             elements.append({'name': test.name, 'type': 'test',
                              'url': test.id, 'description': test.description,
                              'correct': correct_percent, 'incorrect': incorrect_percent})
-        # Тест по латинским терминам
-        if section.is_latin_test:
-            total = len(unit['model'].objects.filter(group=group).filter(type=section.type))
-            if request.user.is_authenticated:
-                if not (unit['variable'] + "_" + group.variable + "_" + 'lat_' + section.type.variable in user_data.keys()):
-                    user_data[unit['variable'] + "_" + group.variable + "_" + 'lat_' + section.type.variable] = {
-                        'correct': 0, 'incorrect': 0, 'incorrect_list': []}
-                    user_info.set_data(user_data)
-                    user_info.save()
-                correct = user_data[unit['variable'] + "_" + group.variable + "_" + 'lat_' + section.type.variable]['correct']
-                correct_percent = round((int(correct) / total) * 100)
-                incorrect_percent = 100 - correct_percent
-            else:
-                correct_percent = 0
-                incorrect_percent = 0
-            elements.append({'name': 'Тест по латинским терминам', 'type': 'test',
-                             'url': 'lat_' + section.type.variable,
-                             'description': 'Проверь свои знания латинским терминов',
-                             'correct': correct_percent, 'incorrect': incorrect_percent})
 
-        section_list.append({'name': section.type.name, 'elements': elements})
-
-    return render(request, 'content/group.html', locals())
+    return render(request, 'content/section.html', locals())
 
 
 def articles_page(request, theme):
@@ -112,11 +93,11 @@ def article_page(request, id):
     return render(request, 'content/article.html', locals())
 
 
-def section_article_page(request, unit, group, id):
+def section_article_page(request, unit, section, id):
     created = create_user_info(request)  # Создать информацию о пользователе, в случае её отсутствия
 
     unit = unit_list[unit]
-    group = unit['group'].objects.get(variable=group)
+    section = unit['section'].objects.get(variable=section)
 
     article = Article.objects.get(pk=id)
     return render(request, 'content/article.html', locals())
@@ -138,3 +119,12 @@ def license_page(request):
     created = create_user_info(request)  # Создать информацию о пользователе, в случае её отсутствия
 
     return render(request, 'content/license.html', locals())
+
+
+# Файлы индексирования
+def robots(request):
+    return render(request, 'robots.txt', content_type='text/plain')
+
+
+def sitemap(request):
+    return render(request, 'sitemap.xml', content_type='text/plain')

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block breacrumb %}
+    <li class="breadcrumb-item"><a href="/start/{{ unit.variable }}">{{ unit.name }}</a></li>
+{% endblock %}
+
+{% block title %}
+    {{ section.name }}
+{% endblock %}
+
+
+{% block content %}
+    {% for element in elements %}
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 ml-auto mr-auto">
+            <div class="group-card">
+                <div class="card card-background" style="background-image: url('{% static 'img/histology.png' %}')">
+                    <a href="{{ element.type }}/{{ element.url }}"></a>
+                    <div class="card-body">
+                        <a href="{{ element.type }}/{{ element.url }}">
+                            <h2 class="card-title">{{ element.name }}</h2>
+                        </a>
+                        <p>{{ element.description }}</p>
+                        {% if element.type == 'test' %}
+                            <div class="row">
+                                <div class="stat-progress col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width:{{ element.correct }}%">
+                                        </div>
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width:{{ element.incorrect }}%">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -12,14 +12,21 @@
 
 {% block content %}
     <div class="row">
-        {% for group in group_list %}
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ml-auto mr-auto">
-                <div class="card group-element">
-                    <div class="card-header card-header-danger" >
-                        <h4 class="card-title" onclick="location.href='{{ group.variable }}'">{{ group.name }}</h4>
-                    </div>
-                    <div class="card-body">
-                          {{ group.description }}
+        {% for section in section_list %}
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 ml-auto mr-auto">
+                <div class="group-card">
+                    <div class="card card-background" style="background-image: url('{% static 'img/histology.png' %}')">
+                        <a href="/start/anatomy/{{ section.variable }}"></a>
+                        <div class="card-body">
+                            <a href="/start/anatomy/{{ section.variable }}">
+                                <h2 class="card-title">{{ section.name }}</h2>
+                            </a>
+                            <p>Статей: {{ section.articles_count }}</p>
+                            <p>Тестов: {{ section.tests_count }}</p>
+                            <div class="progress" style="margin-top: 20px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

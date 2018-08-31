@@ -2,12 +2,12 @@ $(document).ready(function () {
     var form = $('#test');
     var ans_btn = $('#answer_btn');
 
-    function next(test_type, unit, group, test_id, element_id){
+    function next(test_type, unit, section, test_id, element_id){
         var data = {};
         data.action = 'next';
         data.test_type = test_type;
         data.unit = unit;
-        data.group = group;
+        data.section = section;
         data.test_id = test_id;
         data.element_id = element_id;
 
@@ -15,7 +15,6 @@ $(document).ready(function () {
         data["csrfmiddlewaretoken"] = csrf_token;
 
         var url = form.attr("action");
-        console.log(data);
         $.ajax({
             url:url,
             type:'POST',
@@ -34,9 +33,17 @@ $(document).ready(function () {
                 }
 
                 $('.element-title').html(data.title);
-                $('.test-img').html("");
                 if (data.image_url) {
-                    $('.test-img').append('<img src="' + data.image_url + '" class="img-fluid">');
+                    if ($('.test-img').html().trim() != '') {
+                        $('#test-img-img').attr('src', data.image_url)
+                    }
+                    else {
+                        $('.test-img').html("");
+                        $('.test-img').append('<img src="' + data.image_url + '" class="img-fluid" id="test-img-img">');
+                    }
+                }
+                else {
+                    $('.test-img').html("");
                 }
                 $('#test_btn').html("Проверить");
                 test_btn.setAttribute('data-action', 'check');
@@ -51,12 +58,12 @@ $(document).ready(function () {
         });
     };
 
-    function check(test_type, unit, group, test_id, element_id, answer, start){
+    function check(test_type, unit, section, test_id, element_id, answer, start){
         var data = {};
         data.action = 'check';
         data.test_type = test_type;
         data.unit = unit;
-        data.group = group;
+        data.section = section;
         data.test_id = test_id;
         data.element_id = element_id;
         data.answer = answer;
@@ -66,7 +73,6 @@ $(document).ready(function () {
         data["csrfmiddlewaretoken"] = csrf_token;
 
         var url = form.attr("action");
-        console.log(data);
         $.ajax({
             url:url,
             type:'POST',
@@ -114,7 +120,7 @@ $(document).ready(function () {
         var action = test_btn.getAttribute("data-action");
 
         var unit = btn.data("unit");
-        var group = btn.data("group");
+        var section = btn.data("section");
 
         var test_id = btn.data("test_id");
         var element_id = test_btn.getAttribute("data-element_id");
@@ -129,15 +135,14 @@ $(document).ready(function () {
             var radio = $('input[name=test]:checked');
             var answer = radio.val()
         }
-        console.log(answer);
         if (action == 'check') {
-            check(test_type, unit, group, test_id, element_id, answer, start);
+            check(test_type, unit, section, test_id, element_id, answer, start);
         }
         if (action == 'next') {
-            next(test_type, unit, group, test_id, element_id);
+            next(test_type, unit, section, test_id, element_id);
         }
         if (action == 'end') {
-            document.location.href = '/start/' + unit + '/' + group + '/test/' + test_id + '/stat/';
+            document.location.href = '/start/' + unit + '/' + section + '/test/' + test_id + '/stat/';
         }
     });
 

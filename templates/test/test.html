@@ -3,7 +3,7 @@
 
 {% block breacrumb %}
     <li class="breadcrumb-item"><a href="/start/{{ unit.variable }}">{{ unit.name }}</a></li>
-    <li class="breadcrumb-item"><a href="/start/{{ unit.variable }}/{{ group.variable }}">{{ group.name }}</a></li>
+    <li class="breadcrumb-item"><a href="/start/{{ unit.variable }}/{{ section.variable }}">{{ section.name }}</a></li>
 {% endblock %}
 
 {% block title %}
@@ -25,7 +25,7 @@
     <h3 class="element-title">{{ element.question }}</h3>
     <div class="test-img">
         {% if element.image.file %}
-            <img src="/{{ element.image.file.url }}" class="img-fluid">
+            <img src="/{{ element.image.file.url }}" class="img-fluid" id="test-img-img">
         {% endif %}
     </div>
     <div class="col-md-4 ml-auto mr-auto">
@@ -51,7 +51,7 @@
             <div class="alert-answer">
 
             </div>
-            <button type="submit" class="btn btn-primary" id="test_btn" data-action="check" data-test_type={{ data.test_type }} data-unit="{{ data.unit }}" data-group="{{ data.group }}"
+            <button type="submit" class="btn btn-primary" id="test_btn" data-action="check" data-test_type={{ data.test_type }} data-unit="{{ data.unit }}" data-section="{{ data.section }}"
                     data-test_id="{{ data.test_id }}" data-element_id="{{ data.element_id }}" data-start="true">
                 Проверить
             </button>

@@ -48,6 +48,21 @@
 	background: rgba(0,0,0,0.56);
 }
 
+.group-card .card-title {
+	color: white;
+}
+
+.group-card .card {
+	margin-bottom: 0;
+	min-height: 150px;
+	background-blend-mode: multiply;
+	background: rgba(0,0,0,0.56);
+}
+
+.group-card p {
+	color: white;
+}
+
 .group-element .card-body {
 	min-height: 100px;
 }

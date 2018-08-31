@@ -4,12 +4,12 @@ from django.contrib.admin import AdminSite
 from .models import *
 
 
-# Анатомия
+# Элемент анатомии
 class AnatomyElementAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'lat_term']
-    list_display_links = ['id', 'name']
+    list_display_links = ['name', ]
 
-    list_filter = ['group', 'type']
+    list_filter = []
     search_fields = ['name', 'lat_term']
 
     class Meta:
@@ -19,34 +19,12 @@ class AnatomyElementAdmin(admin.ModelAdmin):
 admin.site.register(AnatomyElement, AnatomyElementAdmin)
 
 
-class AnatomyGroupAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'variable']
-    list_display_links = ['id', 'name']
-
-    class Meta:
-        model = AnatomyGroup
-
-
-admin.site.register(AnatomyGroup, AnatomyGroupAdmin)
-
-
-class AnatomyTypeAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'variable']
-    list_display_links = ['id', 'name']
-
-    class Meta:
-        model = AnatomyType
-
-
-admin.site.register(AnatomyType, AnatomyTypeAdmin)
-
-
-# Гистология
+# Элемент гистологии
 class HistologyElementAdmin(admin.ModelAdmin):
     list_display = ['id', 'name']
-    list_display_links = ['id', 'name']
+    list_display_links = ['name', ]
 
-    list_filter = ['group', ]
+    list_filter = []
     search_fields = ['name', 'lat_term']
 
     class Meta:
@@ -56,21 +34,10 @@ class HistologyElementAdmin(admin.ModelAdmin):
 admin.site.register(HistologyElement, HistologyElementAdmin)
 
 
-class HistologyGroupAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'variable']
-    list_display_links = ['id', 'name']
-
-    class Meta:
-        model = HistologyGroup
-
-
-admin.site.register(HistologyGroup, HistologyGroupAdmin)
-
-
-# Статьи
+# Темы статьи
 class ArticleThemeAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'variable']
-    list_display_links = ['id', 'name']
+    list_display_links = ['name', ]
 
     class Meta:
         model = ArticleTheme
@@ -79,9 +46,10 @@ class ArticleThemeAdmin(admin.ModelAdmin):
 admin.site.register(ArticleTheme, ArticleThemeAdmin)
 
 
+# Статья
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'author', 'date', 'is_main']
-    list_display_links = ['id', 'title']
+    list_display_links = ['title', ]
 
     list_filter = ['theme', ]
     search_fields = ['title', 'author']
@@ -105,3 +73,27 @@ class ImageAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Image, ImageAdmin)
+
+
+# Вопрос
+class QuestionAdmin(admin.ModelAdmin):
+    list_display = ['id', 'question', 'answer']
+    list_display_links = ['question', ]
+
+    class Meta:
+        model = Question
+
+
+admin.site.register(Question, QuestionAdmin)
+
+
+# Тест
+class TestAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name']
+    list_display_links = ['name', ]
+
+    class Meta:
+        model = Test
+
+
+admin.site.register(Test, TestAdmin)

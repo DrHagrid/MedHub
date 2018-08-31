@@ -3,8 +3,8 @@
 
 {% block breacrumb %}
     <li class="breadcrumb-item"><a href="/start/{{ unit.variable }}">{{ unit.name }}</a></li>
-    <li class="breadcrumb-item"><a href="/start/{{ unit.variable }}/{{ group.variable }}">{{ group.name }}</a></li>
-    <li class="breadcrumb-item"><a href="/start/{{ unit.variable }}/{{ group.variable }}/test/{{ test_id }}">{{ test_name }}</a></li>
+    <li class="breadcrumb-item"><a href="/start/{{ unit.variable }}/{{ section.variable }}">{{ section.name }}</a></li>
+    <li class="breadcrumb-item"><a href="/start/{{ unit.variable }}/{{ section.variable }}/test/{{ test_id }}">{{ test_name }}</a></li>
 {% endblock %}
 
 {% block title %}

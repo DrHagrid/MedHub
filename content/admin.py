@@ -6,8 +6,8 @@ from .models import *
 
 # Анатомия
 class AnatomySectionAdmin(admin.ModelAdmin):
-    list_display = ['id', 'group', 'type']
-    list_display_links = ['id', 'group']
+    list_display = ['id', 'name', 'variable']
+    list_display_links = ['name', ]
 
     class Meta:
         model = AnatomySection
@@ -18,8 +18,8 @@ admin.site.register(AnatomySection, AnatomySectionAdmin)
 
 # Гистология
 class HistologySectionAdmin(admin.ModelAdmin):
-    list_display = ['id', 'group']
-    list_display_links = ['id', 'group']
+    list_display = ['id', 'name', 'variable']
+    list_display_links = ['name', ]
 
     class Meta:
         model = HistologySection
