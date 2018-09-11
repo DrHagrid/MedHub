@@ -160,6 +160,8 @@ class Test(models.Model):
     name = models.CharField(max_length=64, verbose_name='Название')
     description = models.TextField(blank=True, null=True, verbose_name='Краткая информация')
     questions = models.ManyToManyField(Question, verbose_name='Вопросы')
+    image = models.ForeignKey('database.Image', blank=True, null=True, on_delete=models.DO_NOTHING,
+                              verbose_name='Иллюстрация')
 
     def __str__(self):
         return "%s" % self.name

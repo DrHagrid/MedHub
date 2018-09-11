@@ -46,7 +46,8 @@ def section_page(request, unit, section):
         if element['type'] == 'article':
             article = Article.objects.get(pk=element['id'])
             elements.append({'name': article.title, 'type': 'article',
-                             'url': article.id, 'description': article.description})
+                             'url': article.id, 'description': article.description,
+                             'image': article.image})
         elif element['type'] == 'test':
             test = Test.objects.get(pk=element['id'])
 
@@ -66,6 +67,7 @@ def section_page(request, unit, section):
                 incorrect_percent = 0
             elements.append({'name': test.name, 'type': 'test',
                              'url': test.id, 'description': test.description,
+                             'image': test.image,
                              'correct': correct_percent, 'incorrect': incorrect_percent})
 
     return render(request, 'content/section.html', locals())
