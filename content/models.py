@@ -105,8 +105,8 @@ class PhysiologySection(models.Model):
         return "%s" % self.name
 
     class Meta:
-        verbose_name = 'Раздел гистологии'
-        verbose_name_plural = 'Разделы гистологии'
+        verbose_name = 'Раздел физиологии'
+        verbose_name_plural = 'Разделы физиологии'
 
 
 unit_list = {'anatomy': {'name': 'Анатомия', 'variable': 'anatomy', 'model': AnatomyElement,
