@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
+{% block tab_title %}
+    {{ article.title }}
+{% endblock %}
+
 {% block breacrumb %}
     {% if unit %}
         <li class="breadcrumb-item"><a href="/start/{{ unit.variable }}">{{ unit.name }}</a></li>

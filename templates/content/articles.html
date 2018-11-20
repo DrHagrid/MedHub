@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
+{% block tab_title %}
+    {% if theme == 'all' %}
+        Все статьи
+    {% else %}
+        {{ theme.name }}
+    {% endif %}
+{% endblock %}
+
 {% block breacrumb %}
 
 {% endblock %}
