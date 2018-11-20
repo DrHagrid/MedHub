@@ -74,7 +74,7 @@ class HistologySection(models.Model):
         verbose_name_plural = 'Разделы гистологии'
 
 
-# Гистология
+# Физиология
 class PhysiologySection(models.Model):
     name = models.CharField(max_length=64, verbose_name='Название')
     variable = models.SlugField(verbose_name='Переменная',

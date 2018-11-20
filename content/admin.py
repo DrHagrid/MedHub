@@ -26,3 +26,15 @@ class HistologySectionAdmin(admin.ModelAdmin):
 
 
 admin.site.register(HistologySection, HistologySectionAdmin)
+
+
+# Физиология
+class PhysiologySectionAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'variable']
+    list_display_links = ['name', ]
+
+    class Meta:
+        model = PhysiologySection
+
+
+admin.site.register(PhysiologySection, PhysiologySectionAdmin)
