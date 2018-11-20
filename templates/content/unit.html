@@ -20,9 +20,9 @@
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 ml-auto mr-auto">
                 <div class="group-card">
                     <div class="card card-background" style="background-image: {% if section.image.file %}url('/{{ section.image.file.url }}'){% else %}url('{% static 'img/bg.png' %}'){% endif %}">
-                        <a href="/start/anatomy/{{ section.variable }}"></a>
+                        <a href="{{ section.variable }}"></a>
                         <div class="card-body">
-                            <a href="/start/anatomy/{{ section.variable }}">
+                            <a href="{{ section.variable }}">
                                 <h2 class="card-title">{{ section.name }}</h2>
                             </a>
                             <p>Статей: {{ section.articles_count }}</p>
